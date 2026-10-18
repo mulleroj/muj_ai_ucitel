@@ -24,6 +24,7 @@
 .reveal{opacity:1;transform:none;transition:none}
 .step-card.reveal:hover,.benefit-card.reveal:hover{transform:translateY(-5px);box-shadow:var(--shadow-up);border-color:#cce4dc}
 .qr{overflow:visible}
+.qrbox canvas{height:auto!important;aspect-ratio:1}
 .download-link{display:inline-flex;align-items:center;min-height:44px;padding:8px 10px;margin:7px 0 0;border-radius:10px}
 @media(max-width:620px){
   .qr{flex-direction:column;align-items:stretch;gap:18px}
@@ -31,4 +32,5 @@
   .qr-aside{align-self:stretch}
   .qrbox{max-width:100%}
   .qrbox canvas{width:168px!important;height:168px!important;max-width:100%}
+  .hero-art{overflow:clip}
 }
