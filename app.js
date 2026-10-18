@@ -10,27 +10,3 @@ function renderPrompt(text){promptBox.replaceChildren();let list=null;text.repla
 function showPromptError(){const message=document.createElement("p");message.className="prompt-error";message.setAttribute("role","alert");const title=document.createElement("strong");title.textContent="Prompt se nepodařilo načíst.";const link=document.createElement("a");link.href="/prompt.txt";link.textContent="Otevřít soubor prompt.txt";message.append(title,document.createTextNode(" Zkus to znovu později, nebo si prompt otevři přímo: "),link);promptBox.replaceChildren(message)}
 async function init(){try{renderPrompt(await getPrompt())}catch{showPromptError()}const status=document.querySelector("[data-qr-status]"),canvas=document.getElementById("qr-canvas"),download=document.querySelector("[data-download]"),host=location.hostname;const localHost=["localhost","127.0.0.1","::1"].includes(host);if(!QR_PAGE_URL&&localHost){canvas.hidden=true;download.removeAttribute("href");download.setAttribute("aria-disabled","true");download.tabIndex=-1;download.textContent="QR ke stažení po nasazení";download.addEventListener("click",event=>event.preventDefault());document.querySelector("[data-qr-url]").textContent="QR kód pro sdílení bude dostupný až po nasazení stránky.";status.textContent="Místní náhled není veřejný odkaz.";return}const url=QR_PAGE_URL||location.href.split("#")[0];document.querySelector("[data-qr-url]").textContent=`QR odkaz: ${url}`;try{if(!window.QRCode)throw Error();await QRCode.toCanvas(canvas,url,{width:440,margin:2,errorCorrectionLevel:"M",color:{dark:"#1c2940",light:"#ffffff"}});download.href=canvas.toDataURL("image/png");download.removeAttribute("aria-disabled");status.textContent="Naskenuj a otevři stránku."}catch{canvas.hidden=true;status.textContent="QR kód se nepodařilo načíst. Zkus stránku otevřít znovu."}}
 init();
-
-// Reveal sections gently as they enter view; keep them visible if motion or the API is unavailable.
-const revealItems = document.querySelectorAll(".reveal");
-const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-if (revealItems.length && !reduceMotion && "IntersectionObserver" in window) {
-  document.documentElement.classList.add("js-reveal");
-  const revealObserver = new IntersectionObserver((entries, observer) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add("is-visible");
-        observer.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.12 });
-  revealItems.forEach(item => revealObserver.observe(item));
-} else {
-  revealItems.forEach(item => item.classList.add("is-visible"));
-}
-
-
-
-
-
-
