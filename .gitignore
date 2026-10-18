@@ -1,0 +1,16 @@
+# Lokální konfigurace a tajné údaje
+.env
+.env.*
+!.env.example
+
+# Závislosti a výstupy nástrojů
+node_modules/
+dist/
+coverage/
+
+# Soubory operačního systému a editorů
+.DS_Store
+Thumbs.db
+Desktop.ini
+.vscode/
+.idea/
