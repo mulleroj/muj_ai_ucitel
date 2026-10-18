@@ -7,3 +7,14 @@
 @media(max-width:380px){.wrap{width:calc(100% - 28px)}.nav{font-size:9px}.brand i{margin-inline:-2px}.nav-cta{padding:7px 8px}.hero h1{font-size:46px}.actions .quiet{padding-inline:4px}.step-card{padding:13px}.steps h3{font-size:13px}.steps p{font-size:11px}.qr{padding-inline:17px}}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}.reveal{opacity:1;transform:none}}
 
+/* The study prompt is essential content and must never depend on scroll-reveal. */
+.prompt-area .heading,.prompt-area .card{opacity:1!important;transform:none!important}
+.prompt-scroll-hint{margin:0 0 9px 5px;color:#466b70;font-size:12px;font-weight:700}
+.prompt-scroll-hint span{display:inline-block;color:var(--teal);animation:prompt-nudge 1.8s ease-in-out infinite}
+.prompt{overscroll-behavior:contain;scrollbar-gutter:stable}
+.prompt:focus-visible{outline-offset:-4px}
+.prompt-error{padding:22px!important;border:1px solid #e6b1a9;border-radius:12px;background:#fff2ef;color:#822f25!important;font-size:15px!important}
+.prompt-error a{display:inline-block;color:#822f25;font-weight:800;text-decoration:underline;text-underline-offset:3px}
+@keyframes prompt-nudge{0%,100%{transform:translateY(0)}50%{transform:translateY(4px)}}
+@media(prefers-reduced-motion:reduce){.prompt-scroll-hint span{animation:none}}
+
